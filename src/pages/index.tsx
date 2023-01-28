@@ -32,7 +32,13 @@ export async function getStaticProps() {
     }
   } catch (error) {
     return {
-      props: {},
+      props: {
+        tags: {
+          All: 0,
+          tags: [],
+        },
+        posts: [],
+      },
       revalidate: 1,
     }
   }
