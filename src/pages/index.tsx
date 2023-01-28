@@ -31,7 +31,10 @@ export async function getStaticProps() {
       revalidate: 1,
     }
   } catch (error) {
-    return
+    return {
+      props: {},
+      revalidate: 1,
+    }
   }
 }
 
