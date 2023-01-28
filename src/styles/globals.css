@@ -34,6 +34,23 @@ body::-webkit-scrollbar-thumb {
   flex-direction: column;
 }
 
+.no-scrollbars {
+  scrollbar-width: none;
+  scrollbar-color: transparent;
+  -ms-overflow-style: none;
+
+}
+
+.no-scrollbars::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+.no-scrollbars::-webkit-scrollbar-track {
+  background: transparent;
+}
+.no-scrollbars::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
 .sticky-nav {
   position: sticky;
   z-index: 40;
@@ -116,3 +133,4 @@ nav {
     overflow-x: hidden;
   }
 }
+
