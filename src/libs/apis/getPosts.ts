@@ -22,8 +22,8 @@ export async function getPosts() {
 
   // Check Type
   if (
-    rawMetadata?.type !== "collection_view_page" &&
-    rawMetadata?.type !== "collection_view"
+      rawMetadata?.type !== "collection_view_page" &&
+      rawMetadata?.type !== "collection_view"
   ) {
     return []
   } else {
@@ -35,10 +35,10 @@ export async function getPosts() {
       const properties = (await getPageProperties(id, block, schema)) || null
       // Add fullwidth, createdtime to properties
       properties.createdTime = new Date(
-        block[id].value?.created_time
+          block[id].value?.created_time
       ).toString()
       properties.fullWidth =
-        (block[id].value?.format as any)?.page_full_width ?? false
+          (block[id].value?.format as any)?.page_full_width ?? false
 
       data.push(properties)
     }

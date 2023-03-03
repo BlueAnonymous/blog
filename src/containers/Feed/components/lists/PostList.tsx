@@ -1,9 +1,8 @@
-import PostCard from '@components/PostCard'
-import { TPosts, TTags } from '@/src/types'
-import { useRouter } from 'next/router'
-import React, {CSSProperties, useEffect, useState} from 'react'
-import { FixedSizeList } from 'react-window';
-import css from "styled-jsx/css";
+import PostCard from "@components/PostCard"
+import { TPosts } from "@/src/types"
+import { useRouter } from "next/router"
+import React, { useEffect, useState } from "react"
+import { DEFAULT_CATEGORY } from "@/src/constants"
 
 type Props = {
   q: string
@@ -31,15 +30,15 @@ const PostList: React.FC<Props> = ({ q, posts }) => {
       // tag
       if (currentTag) {
         filteredPosts = filteredPosts.filter(
-          (post) => post && post.tags && post.tags.includes(currentTag)
+            (post) => post && post.tags && post.tags.includes(currentTag)
         )
       }
 
       // category
       if (currentCategory !== DEFAULT_CATEGORY) {
         filteredPosts = filteredPosts.filter(
-          (post) =>
-            post && post.category && post.category.includes(currentCategory)
+            (post) =>
+                post && post.category && post.category.includes(currentCategory)
         )
       }
       // order
@@ -51,33 +50,18 @@ const PostList: React.FC<Props> = ({ q, posts }) => {
     })
   }, [q, currentTag, currentCategory, currentOrder, setFilteredPosts, posts])
 
-  const Row = ({ index, style }: { index: number; style: CSSProperties}) => {
-    return (
-      <div style={style}>
-        <PostCard post={filteredPosts[index]} />
-      </div>
-    )
-  }
-
   return (
-    <>
-      <div className="my-2">
-        {!filteredPosts.length && (
-          <p className="text-gray-500 dark:text-gray-300">Nothing! 😺</p>
-        )}
-        <FixedSizeList
-            height={1260}
-            itemCount={filteredPosts.length}
-            itemSize={200}
-            width={'inherit'}
-            className={'no-scrollbars'}
-            >
-            {Row}
-        </FixedSizeList>
-      </div>
-    </>
+      <>
+        <div className="my-2">
+          {!filteredPosts.length && (
+              <p className="text-gray-500 dark:text-gray-300">Nothing! 😺</p>
+          )}
+          {filteredPosts.map((post) => (
+              <PostCard key={post.id} data={post} />
+          ))}
+        </div>
+      </>
   )
 }
-
 
 export default PostList

@@ -7,7 +7,7 @@ import Feed from "@containers/Feed"
 import CONFIG from "../../site.config"
 import { NextPageWithLayout } from "./_app"
 import { TCategories, TPosts, TTags } from "../types"
-import { getPosts } from "../libs/apis"
+import { getPosts } from "@libs/apis"
 import { DEFAULT_CATEGORY } from "../constants"
 
 export async function getStaticProps() {
@@ -16,6 +16,7 @@ export async function getStaticProps() {
     const filteredPost = filterPosts(posts)
     const tags = getAllSelectItemsFromPosts("tags", filteredPost)
     const categories = getAllSelectItemsFromPosts("category", filteredPost)
+
 
     return {
       props: {
@@ -39,7 +40,6 @@ export async function getStaticProps() {
         },
         posts: [],
       },
-      revalidate: 1,
     }
   }
 }
@@ -56,16 +56,16 @@ const FeedPage: NextPageWithLayout<Props> = ({ categories, tags, posts }) => {
 
 FeedPage.getLayout = function getlayout(page) {
   return (
-    <Layout
-      metaConfig={{
-        title: CONFIG.blog.title,
-        description: CONFIG.blog.description,
-        type: "website",
-        url: CONFIG.link,
-      }}
-    >
-      {page}
-    </Layout>
+      <Layout
+          metaConfig={{
+            title: CONFIG.blog.title,
+            description: CONFIG.blog.description,
+            type: "website",
+            url: CONFIG.link,
+          }}
+      >
+        {page}
+      </Layout>
   )
 }
 
